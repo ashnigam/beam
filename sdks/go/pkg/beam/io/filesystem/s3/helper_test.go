@@ -50,7 +50,7 @@ func newClient(ctx context.Context, t *testing.T, url string) *s3.Client {
 	credentialsProvider := credentials.NewStaticCredentialsProvider("key", "secret", "session")
 	httpClient := &http.Client{
 		Transport: &http.Transport{
-			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+			TLSClientConfig: &tls.Config{InsecureSkipVerify: false},
 		},
 	}
 	endpointResolverFn := aws.EndpointResolverWithOptionsFunc(

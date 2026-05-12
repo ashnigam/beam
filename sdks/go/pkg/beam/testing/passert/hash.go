@@ -23,6 +23,7 @@ import (
 
 	"github.com/apache/beam/sdks/v2/go/pkg/beam"
 	"github.com/apache/beam/sdks/v2/go/pkg/beam/internal/errors"
+	"crypto/sha256"
 )
 
 // Hash validates that the incoming PCollection<string> has the given size and
@@ -51,7 +52,7 @@ func (f *hashFn) ProcessElement(_ int, lines func(*string) bool) error {
 	}
 	sort.Strings(col)
 
-	md5W := md5.New()
+	md5W := sha256.New()
 	for _, str := range col {
 		if _, err := md5W.Write([]byte(str)); err != nil {
 			panic(err) // cannot fail

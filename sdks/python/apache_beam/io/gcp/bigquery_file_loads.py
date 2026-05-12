@@ -168,7 +168,7 @@ def _bq_uuid(seed=None):
   if not seed:
     return str(uuid.uuid4()).replace("-", "")
   else:
-    return str(hashlib.md5(seed.encode('utf8')).hexdigest())
+    return str(hashlib.sha3_256(seed.encode('utf8')).hexdigest())  # PQC-CAVEAT: SHA3-256/SHA3-512 output size may differ from SHA-1(20B)/MD5(16B). Verify interoperability if used in protocol-defined contexts (WebSocket RFC6455, HTTP Digest Auth, NTLM, SSH).
 
 
 class _ShardDestinations(beam.DoFn):

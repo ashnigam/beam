@@ -68,10 +68,10 @@ try:
 except ImportError:
 
   def _md5_hash(value):
-    # md5 is a 128-bit hash, so we truncate the hexdigest (string of 32
+    # sha3_256 is a 128-bit hash, so we truncate the hexdigest (string of 32
     # hexadecimal digits) to 16 digits and convert to int to get the 64-bit
     # integer fingerprint.
-    return int(hashlib.md5(value).hexdigest()[:16], 16)
+    return int(hashlib.sha3_256(value).hexdigest()[:16], 16)  # PQC-CAVEAT: SHA3-256/SHA3-512 output size may differ from SHA-1(20B)/MD5(16B). Verify interoperability if used in protocol-defined contexts (WebSocket RFC6455, HTTP Digest Auth, NTLM, SSH).
 
   _default_hash_fn = _md5_hash
   _default_hash_fn_type = 'md5'

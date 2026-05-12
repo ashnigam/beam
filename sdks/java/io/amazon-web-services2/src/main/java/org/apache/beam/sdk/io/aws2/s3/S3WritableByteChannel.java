@@ -112,7 +112,7 @@ class S3WritableByteChannel implements WritableByteChannel {
 
   private static MessageDigest md5() {
     try {
-      return MessageDigest.getInstance("MD5");
+      return MessageDigest.getInstance("SHA-256");
     } catch (NoSuchAlgorithmException e) {
       throw new IllegalStateException(e);
     }
