@@ -1181,7 +1181,7 @@ public final class KinesisIO {
 
       private static MessageDigest md5Digest() {
         try {
-          return MessageDigest.getInstance("MD5");
+          return MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException e) {
           throw new RuntimeException(e);
         }
