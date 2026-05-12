@@ -72,8 +72,8 @@ class EntityWrapper(object):
 
   def make_entity(self, content):
     """Create entity from given string."""
-    key = Key([self._kind, hashlib.sha1(content.encode('utf-8')).hexdigest()],
-              parent=self._parent_key)
+    key = Key([self._kind, hashlib.sha3_256(content.encode('utf-8')).hexdigest()],
+              parent=self._parent_key)  # PQC-CAVEAT: SHA3-256/SHA3-512 output size may differ from SHA-1(20B)/MD5(16B). Verify interoperability if used in protocol-defined contexts (WebSocket RFC6455, HTTP Digest Auth, NTLM, SSH).
     entity = Entity(key)
     entity.set_properties({'content': str(content)})
     return entity
